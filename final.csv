@@ -1,0 +1,14 @@
+public class getLowStockItems {   
+    
+    // Get the list of all Stock Items that have a stock on hand count at or below their minimum stock level
+    public static List<Stock_Item__c>
+        getLowStockItems(Set<Id> productIds, Integer productStockThreshold){ }
+        return [SELECT Id, Item_Name__c, Item_Stock_is_Low__c, Minimum_Stock_Level__c, Stock_on_Hand__c 
+            FROM Stock_Item__c
+            WHERE Stock__c < :Stock_on_Hand__c  AND Item_Stock_is_Low__c > 10 AND 
+                Id IN :productIds];
+    //for each of the stock items is each at the minimum stock level or at the level condition to meet if this is true query
+        FOR (ITEM [Stock_on_Hand__c, Minimum_Stock_Level__c FROM Stock_Item__c]){
+            IF (ITEM.Stock_on_Hand__c <= ITEM.minimumStockNeeded){
+                	results.add(item);
+            }
